@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your version control system (e.g., Git)
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/your-branch-name']], userRemoteConfigs: [[url: 'https://your-git-repository-url.git']]])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the project using Maven
+                script {
+                    withMaven(maven: 'MavenInstallationName') {
+                        sh 'mvn clean install'
+                    }
+                }
+            }
+        }
+
+        // Add more stages as needed, such as testing or deployment stages
+    }
+
+    post {
+        success {
+            // This block is executed if the pipeline is successful
+            echo 'Build successful!'
+
+            // You can add further actions here, such as triggering downstream jobs or notifications
+        }
+        failure {
+            // This block is executed if the pipeline fails
+            echo 'Build failed!'
+
+            // You can add further actions here, such as sending notifications or triggering other jobs
+        }
+    }
+}
+I have attached my updated resume for your reference, showcasing my diverse skill set, hands-on experience, and achievements I would be delighted to further discuss 
